@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
+    <style>
+            /* Set the size of the div element that contains the map */
+            #map {
+                height: 400px;  /* The height is 400 pixels */
+                width: 100%;  /* The width is the width of the web page */
+                }
+    </style>
+          
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,25 +19,17 @@
         <h1 style="font-size:60px;">Real Time Monitoring System</h1>
         <hr>
         <!--This is where input starts for the fleet. It will take the name of place as input and use google services to identify it-->
-        <form name="Input1" method="POST">
-            <fieldset>
-            <legend>Location of Source</legend>
-            Source 1<br>
-            <input type="text" name="Source_11">
-            <br>
-            <legend>Location of Destination</legend>
-            Destination 1<br>
-            <input type="text" name="Destination_1">
-            <br>
-            Destination 2<br>
-            <input type="text" name="Destination_2">      
-            <br><br>
-            <input type="submit" value="Submit">
-            </fieldset>
+        <form method="post">
+            {% csrf_token %}
+            {{form}}
+            <button type="submit">Submit</button>
         </form>
         <br>
         <br>
-        <p>Please drag the boundary of RTMS panel and Map to expand the map.</p>
+        <p>{{Source}}
+            <br>
+            {{Destination}}
+        </p>
         
 
     </div>
@@ -40,7 +40,7 @@
         var map;
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
+            center: {lat: 19, lng: 72},
             zoom: 8
             });
             }

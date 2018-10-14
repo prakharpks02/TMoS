@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('about', views.about, name='about'),
-    path('contact', views.contact, name='contact'),
-    path('rtms/fleet', views.fleet, name='fleet'),
-    path('rtms/map', views.map, name='map'),
-    path('rtms', views.rtms, name='rtms'),
+    url(r'^admin/', admin.site.urls),
+    url(r'^$', views.home, name='home'),
+    url(r'^about$', views.about, name='about'),
+    url(r'^contact$', views.contact, name='contact'),
+    url(r'^rtms/fleet$', views.fleet, name='fleet'),
+    url(r'^rtms/map$', views.map, name='map'),
+    url(r'^rtms$', include('Manager.urls')),
+    #url(r'^rtms/output$', views.output, name='output'),
 ]
