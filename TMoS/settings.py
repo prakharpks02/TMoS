@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['prakharpks02.pythonanywhere.com', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'Manager',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'TMoS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['TMoS/Templates'],
+        'DIRS': ['Templates','Manager/Templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
