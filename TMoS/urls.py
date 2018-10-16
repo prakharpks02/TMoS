@@ -21,10 +21,11 @@ from . import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
+    url(r'^home$', views.home, name='home'),
     url(r'^about$', views.about, name='about'),
     url(r'^contact$', views.contact, name='contact'),
     url(r'^rtms/fleet$', views.fleet, name='fleet'),
     url(r'^rtms/map$', views.map, name='map'),
     url(r'^rtms$', include('Manager.urls')),
-    #url(r'^rtms/output$', views.output, name='output'),
+    url(r'^login$', include('login.urls')),
 ]

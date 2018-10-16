@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['prakharpks02.pythonanywhere.com', 'localhost']
 
 INSTALLED_APPS = [
     'Manager',
+    'login',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'TMoS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['Templates','Manager/Templates'],
+        'DIRS': ['Templates','Manager\Templates','login\Templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,3 +121,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+CSRF_COOKIE_DOMAIN = None
