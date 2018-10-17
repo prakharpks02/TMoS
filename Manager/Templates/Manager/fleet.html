@@ -15,14 +15,13 @@
     <title>RTMS</title>
 </head>
 <body>
-    {% csrf_token %}
     <div id='input'>
         <h1 style="font-size:60px;">Real Time Monitoring System</h1>
         <hr>
         <!--This is where input starts for the fleet. It will take the name of place as input and use google services to identify it-->
         <form method="post">
             {% csrf_token %}
-            {{form}}
+            {{form.as_p}}
             <button type="submit">Submit</button>
         </form>
         <br>

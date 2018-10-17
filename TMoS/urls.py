@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^rtms/fleet$', views.fleet, name='fleet'),
     url(r'^rtms/map$', views.map, name='map'),
     url(r'^rtms$', include('Manager.urls')),
-    url(r'^login$', include('login.urls')),
+    url(r'^login', include('login.urls')),
 ]

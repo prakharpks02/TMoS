@@ -121,4 +121,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
-CSRF_COOKIE_DOMAIN = None
+LOGIN_URL = '/login'

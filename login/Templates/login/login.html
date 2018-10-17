@@ -4,19 +4,19 @@
 
 <body>
     <div id="login">
-        <form class="form-horizontal" name="LoginForm" action="/rtms" method="post">
+        <form method="post">
             {% csrf_token %}
-            {{form.as_table}}   
+            {{form.as_p}}   
 
             <input type="submit" value="Login" class="btn btn-primary pull-right" />
         </form>
-        {% if errors %}
+        <!--{% if errors %}
             <ul>
                 {% for error in errors %}
                 <li>{{ error }}</li>
                 {% endfor %}
             </ul>
-        {% endif %}
+        {% endif %}-->
     </div>
     <br><br>
 
