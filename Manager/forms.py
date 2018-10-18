@@ -15,5 +15,5 @@ class HomeForm(forms.ModelForm):
     destination10 = forms.CharField()
     class Meta:
         model = Home
-        fields = ('source', 'destination1', 'destination2', 'destination3', 'destination4', 'destination5', 'destination6'
-         'destination7', 'destination8', 'destination9', 'destination10')
+        fields = ('source', 'destination1', 'destination2', 'destination3', 'destination4', 'destination5', 'destination6',
+        'destination7', 'destination8', 'destination9', 'destination10')
