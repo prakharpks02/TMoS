@@ -13,7 +13,8 @@ class HomeForm(forms.ModelForm):
     destination8 = forms.CharField()
     destination9 = forms.CharField()
     destination10 = forms.CharField()
+    no_of_destinations = forms.IntegerField()
     class Meta:
         model = Home
         fields = ('source', 'destination1', 'destination2', 'destination3', 'destination4', 'destination5', 'destination6',
-        'destination7', 'destination8', 'destination9', 'destination10')
+        'destination7', 'destination8', 'destination9', 'destination10', 'no_of_destinations')

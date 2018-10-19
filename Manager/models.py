@@ -12,3 +12,4 @@ class Home(models.Model):
     destination8 = models.CharField(max_length=40)
     destination9 = models.CharField(max_length=40)
     destination10 = models.CharField(max_length=40)
+    no_of_destinations = models.IntegerField()
