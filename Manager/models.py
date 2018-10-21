@@ -23,3 +23,4 @@ class Home(models.Model):
     weight8 = models.IntegerField()
     weight9 = models.IntegerField()
     weight10 = models.IntegerField()
+    capacityOfTruck = models.IntegerField()

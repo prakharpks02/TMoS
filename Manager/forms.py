@@ -24,8 +24,9 @@ class HomeForm(forms.ModelForm):
     weight8 = forms.IntegerField()
     weight9 = forms.IntegerField()
     weight10 = forms.IntegerField()
+    capacityOfTruck = forms.IntegerField()
     class Meta:
         model = Home
         fields = ('source', 'destination1', 'destination2', 'destination3', 'destination4', 'destination5', 'destination6',
         'destination7', 'destination8', 'destination9', 'destination10', 'no_of_destinations', 'weight1', 'weight2', 'weight3',
-        'weight4', 'weight5', 'weight6', 'weight7', 'weight8', 'weight9', 'weight10')
+        'weight4', 'weight5', 'weight6', 'weight7', 'weight8', 'weight9', 'weight10', 'capacityOfTruck')

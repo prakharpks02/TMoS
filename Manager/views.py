@@ -4,6 +4,8 @@ from Manager.forms import HomeForm
 from Manager.models import Home
 from django.contrib.auth.decorators import login_required
 import json as simplejson, urllib
+import numpy as np
+from Manager.Code import looperBeta
 
 
 @login_required
@@ -25,8 +27,8 @@ def rtms(request):
             Destination8=Home.destination8
             Destination9=Home.destination9
             Destination10=Home.destination10
-            number=Home.no_of_destinations
-            Weight = number*[0]
+            numberOfSources=Home.no_of_destinations
+            Weight = numberOfSources*[0]
             Weight[0]=Home.weight1
             Weight[1]=Home.weight2
             Weight[2]=Home.weight3
@@ -37,6 +39,7 @@ def rtms(request):
             Weight[7]=Home.weight8
             Weight[8]=Home.weight9
             Weight[9]=Home.weight10
+            capacityOfTruck = Home.capacityOfTruck
             Home.save()
             GEOCODE_BASE_URL = 'https://maps.googleapis.com/maps/api/distancematrix/json'
             API_KEY = 'AIzaSyC7g11CKYY1xfnx-_Ofv59oSuDAIqH8e1A'
@@ -44,18 +47,35 @@ def rtms(request):
 
             url = GEOCODE_BASE_URL + '?' + 'origins=' + Source +'&destinations=' + Destination1 + '|' + Destination2 + '|' + Destination3 + '|' + Destination4 + '|' + Destination5 + '|' + Destination6 + '|' + Destination7 + '|' + Destination8 + '|' + Destination9 + '|' + Destination10 + '&mode=driving&traffic_model=best_guess&departure_time=' + time + '&language=en-En&key=' + API_KEY
             result = simplejson.load(urllib.request.urlopen(url))
+
+            url_des = GEOCODE_BASE_URL + '?' + 'origins=' + Destination1 + '|' + Destination2 + '|' + Destination3 + '|' + Destination4 + '|' + Destination5 + '|' + Destination6 + '|' + Destination7 + '|' + Destination8 + '|' + Destination9 + '|' + Destination10 +'&destinations=' + Destination1 + '|' + Destination2 + '|' + Destination3 + '|' + Destination4 + '|' + Destination5 + '|' + Destination6 + '|' + Destination7 + '|' + Destination8 + '|' + Destination9 + '|' + Destination10 + '&mode=driving&traffic_model=best_guess&departure_time=' + time + '&language=en-En&key=' + API_KEY
+            result_des = simplejson.load(urllib.request.urlopen(url_des))
+
+
             
             
-            for i in range(number):
+            for i in range(numberOfSources):
                 sourcedistance[i+1] =result['rows'][0]['elements'][i]['distance']['value']
-            for i in range(number,10):
+            for i in range(numberOfSources,10):
                 sourcedistance[i+1] = "Form is not filled for this destination"
-            sdmatrix = number*[0]
-            for i in range(number):
-                sdmatrix[i] = sourcedistance['i+1']
-            weightF = number*[0]
-            for i in range(number):
+            distancesToW = numberOfSources*[0]
+            for i in range(numberOfSources):
+                distancesToW[i] = sourcedistance[i+1]
+            weightF = numberOfSources*[0]
+            for i in range(numberOfSources):
                 weightF[i] = Weight[i]
+           
+            DistMatrix = [[0 for x in range(numberOfSources)] for y in range(numberOfSources)]
+            for i in range(numberOfSources):
+                for j in range(numberOfSources):
+                    DistMatrix[i][j] =result_des['rows'][i]['elements'][j]['distance']['value']
+
+            noOfSources=numberOfSources
+
+            looperBeta(noOfSources, capacityOfTruck, weightF, distancesToW, DistMatrix)
+
+
+            
 
     else:
         form = HomeForm()
@@ -71,85 +91,19 @@ def rtms(request):
         Destination9="Nothing filled yet"
         Destination10="Nothing filled yet"
         result = "Form not filled yet"
+        result_des = "Form not filled yet"
         for i in range(10):
             sourcedistance[i+1] ="Form is not filled for this destination"
+        LoadByTruck = "Fill the Form"
+        DistByTruck = "Fill the Form"
+        roundsByTruck = "Fill the Form"
+
 
     
     context={'form':form, 'Source':Source, 'Destination1':Destination1, 'Destination2':Destination2, 'Destination3':Destination3, 'Destination4':Destination4, 'Destination5':Destination5,
      'Destination6':Destination6, 'Destination7':Destination7, 'Destination8':Destination8, 'Destination9':Destination9, 
      'Destination10':Destination10, 'result':result, 'distance1':sourcedistance[1], 'distance2':sourcedistance[2],
      'distance3':sourcedistance[3], 'distance4':sourcedistance[4], 'distance5':sourcedistance[5], 'distance6':sourcedistance[6],
-     'distance7':sourcedistance[7], 'distance8':sourcedistance[8], 'distance9':sourcedistance[9], 'distance10':sourcedistance[10]}
+     'distance7':sourcedistance[7], 'distance8':sourcedistance[8], 'distance9':sourcedistance[9], 'distance10':sourcedistance[10],
+     'Load':LoadByTruck, 'Dist':DistByTruck, 'No_of_rounds':roundsByTruck}
     return render(request, 'Manager/fleet.html', context)
-
-
-
-
-    """def looperBeta(noOfSources, capacityOfTruck, weightF, distancesToW, DistMatrix) :
-    
-    # 1. Initializing the variables
-    LoadByTruck, DistByTruck, roundsByTruck = 0, 0, 0
-    
-    # 2. Lets select a starting point (if at warehouse use this in the loop)
-    k = findSource(weightF)
-    print("Start point : ", k)
-    
-    distByTrucks = []
-    loadByTrucks = []
-    
-    LoadByTruck += weightF[k]
-    DistByTruck += distancesToW[k]
-    
-    # So the loop starts from here :
-    
-    while noOfSources > 1 : 
-        
-        if DistByTruck == 0 :
-            k = findSource(weightF)
-            LoadByTruck += weightF[k]
-            DistByTruck += distancesToW[k]
-        
-        # 3. See the possibilities to go to
-        leftWeight = capacityOfTruck - LoadByTruck
-        possibilities = findPoss(k, leftWeight, weightF)
-        print("The possibilities now are : ",possibilities)
-        print("I am at ", k)
-        
-        # 3.01 If they have no possibilities to go to and sources are left on the map, go to warehouse
-        if len(possibilities) == 0 :
-            
-            DistByTruck += distancesToW[k]
-            distByTrucks.append(DistByTruck)
-            
-            loadByTrucks.append(LoadByTruck)
-            
-            roundsByTruck += 1
-            
-            print("Going to Warehouse from ", k)
-            
-            LoadByTruck = 0     
-            continue
-
-        # 4. Find the nearest source amongst them
-        closestSource, closestDistance = myNeighbour(k, DistMatrix, possibilities)
-        print("ClosestNeighbour : ", closestSource)
-
-        # 5. Update the dist and load values
-        DistByTruck += closestDistance
-        LoadByTruck += weightF[closestSource]
-        
-        print("Total Distance Travelled till now : ",DistByTruck)
-        print("Total load carried on now : ",LoadByTruck)
-
-        # 6. Delete the previous point k and update k
-        DistMatrix, weightF, distancesToW = deletePoints(k, DistMatrix, weightF, distancesToW)
-        if k > closestSource :
-            k = closestSource
-        elif k < closestSource :
-            k = closestSource - 1
-        
-        noOfSources = len(weightF)
-    
-    DistByTruck += distancesToW[k]
-    
-    return LoadByTruck, DistByTruck, roundsByTruck"""
