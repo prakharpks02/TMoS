@@ -28,7 +28,7 @@ def rtms(request):
             Destination9=Home.destination9
             Destination10=Home.destination10
             numberOfSources=Home.no_of_destinations
-            Weight = numberOfSources*[0]
+            Weight = 10*[0]
             Weight[0]=Home.weight1
             Weight[1]=Home.weight2
             Weight[2]=Home.weight3
@@ -69,10 +69,15 @@ def rtms(request):
             for i in range(numberOfSources):
                 for j in range(numberOfSources):
                     DistMatrix[i][j] =result_des['rows'][i]['elements'][j]['distance']['value']
+           
+            print(result_des)
+            print(DistMatrix)
+            print(weightF)
+            print(distancesToW)
 
             noOfSources=numberOfSources
 
-            looperBeta(noOfSources, capacityOfTruck, weightF, distancesToW, DistMatrix)
+            LoadByTruck, DistByTruck, roundsByTruck = looperBeta(noOfSources, capacityOfTruck, weightF, distancesToW, DistMatrix)
 
 
             

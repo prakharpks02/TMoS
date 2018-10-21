@@ -3,7 +3,6 @@ import numpy as np
 def findSource(weightF) :
     k = weightF.index(max(weightF))
     return k
-    k = findSource(weightF)
 
 
 def findPoss(k, leftWeight, weightF) :                               # Find possibles for a particular k, leftWeight, weightF  
@@ -64,8 +63,8 @@ def looperBeta(noOfSources, capacityOfTruck, weightF, distancesToW, DistMatrix) 
         # 3. See the possibilities to go to
         leftWeight = capacityOfTruck - LoadByTruck
         possibilities = findPoss(k, leftWeight, weightF)
-        print("The possibilities now are : ",possibilities)
-        print("I am at ", k)
+        #print("The possibilities now are : ",possibilities)
+        #print("I am at ", k)
         
         # 3.01 If they have no possibilities to go to and sources are left on the map, go to warehouse
         if len(possibilities) == 0 :
@@ -77,21 +76,21 @@ def looperBeta(noOfSources, capacityOfTruck, weightF, distancesToW, DistMatrix) 
             
             roundsByTruck += 1
             
-            print("Going to Warehouse from ", k)
+            #print("Going to Warehouse from ", k)
             
             LoadByTruck = 0     
             continue
 
         # 4. Find the nearest source amongst them
         closestSource, closestDistance = myNeighbour(k, DistMatrix, possibilities)
-        print("ClosestNeighbour : ", closestSource)
+        #print("ClosestNeighbour : ", closestSource)
 
         # 5. Update the dist and load values
         DistByTruck += closestDistance
         LoadByTruck += weightF[closestSource]
         
-        print("Total Distance Travelled till now : ",DistByTruck)
-        print("Total load carried on now : ",LoadByTruck)
+        #print("Total Distance Travelled till now : ",DistByTruck)
+        #print("Total load carried on now : ",LoadByTruck)
 
         # 6. Delete the previous point k and update k
         DistMatrix, weightF, distancesToW = deletePoints(k, DistMatrix, weightF, distancesToW)
@@ -100,7 +99,7 @@ def looperBeta(noOfSources, capacityOfTruck, weightF, distancesToW, DistMatrix) 
         elif k < closestSource :
             k = closestSource - 1
 
-    noOfSources = len(weightF)
+        noOfSources = len(weightF)
 
     DistByTruck += distancesToW[k]
 

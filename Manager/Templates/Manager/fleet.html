@@ -21,8 +21,10 @@
         <!--This is where input starts for the fleet. It will take the name of place as input and use google services to identify it-->
         <form method="post">
             {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit">Submit</button>
+            <table align="center", frame="border", width="80%" >
+                {{form.as_table}}
+                <input align="bottom", type="submit", value="Submit">
+            </table>
         </form>
         <br>
         <br>
