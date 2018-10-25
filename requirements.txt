@@ -1,3 +1,4 @@
 pip==18.1
+python==3.5
 django==2.1.2
 numpy
