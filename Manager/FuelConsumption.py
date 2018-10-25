@@ -1,7 +1,3 @@
-params = 0.001, 1, 9.81, 3, 0.57, 0.35, 46*(10**6), 0.832
-
-
-
 def FuelConsumption(V, t, M, theta, params) :
     mu, rho, g, A, Cp, eta, H, densDiesel = params                               # Constants are extracted via params
     N = len(V)                                                                   # FC (will be calculated in L/tonnes)
@@ -15,3 +11,4 @@ def FuelConsumptionStoD(V, t, Mc, theta, params) :
     FC2 = [round((((mu)*(Mc)*(1000)*(g)*(math.cos(theta[i]))+(Mc)*(1000)*(g)*(math.sin(theta[i]))+0.5*(rho)*(Cp)*(A)*((V[i])**2))*((V[i]))*(t[i]*60))/(eta*H*(densDiesel)),3) for i in range(N)]
 	
     return FC2
+
