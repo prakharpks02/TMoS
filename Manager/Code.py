@@ -1,4 +1,7 @@
 import numpy as np
+from Manager.FuelConsumption import FuelConsumption
+from Manager.FuelConsumption import FuelConsumptionStoD
+
 
 def findSource(weightF) :
     k = weightF.index(max(weightF))
