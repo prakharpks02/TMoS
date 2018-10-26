@@ -1,6 +1,6 @@
-"""from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from Manager.forms import HomeForm
+"""from Manager.forms import HomeForm
 from Manager.models import Home
 from django.contrib.auth.decorators import login_required
 import json as simplejson, urllib
@@ -8,6 +8,10 @@ import numpy as np
 from Manager.Code import looperBeta
 from Manager.FuelConsumption import FuelConsumption
 from Manager.FuelConsumption import FuelConsumptionStoD"""
+
+
+def rtms(request):
+    return render(request, 'about.html')
 
 """
 @login_required
