@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+"""from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from Manager.forms import HomeForm
 from Manager.models import Home
@@ -7,9 +7,9 @@ import json as simplejson, urllib
 import numpy as np
 from Manager.Code import looperBeta
 from Manager.FuelConsumption import FuelConsumption
-from Manager.FuelConsumption import FuelConsumptionStoD
+from Manager.FuelConsumption import FuelConsumptionStoD"""
 
-
+"""
 @login_required
 def rtms(request):
     distancesToW = numberOfSources*[0]
@@ -106,11 +106,11 @@ def rtms(request):
             LoadByTruck, DistByTruck, roundsByTruck = looperBeta(noOfSources, capacityOfTruck, weightF, distancesToW, DistMatrix)
 
 
-            
-
+    """        
+"""
     else:
         form = HomeForm()
-        """Source="Nothing filled yet"
+        Source="Nothing filled yet"
         Destination1="Nothing filled yet"
         Destination2="Nothing filled yet"
         Destination3="Nothing filled yet"
@@ -130,14 +130,13 @@ def rtms(request):
         roundsByTruck = "Fill the Form"""
 
 
-    
-    context={'form':form,} #"""'Load':LoadByTruck, 'Dist':DistByTruck, 'No_of_rounds':roundsByTruck"""
+    #context={'form':form,} #"""'Load':LoadByTruck, 'Dist':DistByTruck, 'No_of_rounds':roundsByTruck"""
     #"""'Source':Source, 'Destination1':Destination1, 'Destination2':Destination2, 'Destination3':Destination3, 'Destination4':Destination4, 'Destination5':Destination5,
      #'Destination6':Destination6, 'Destination7':Destination7, 'Destination8':Destination8, 'Destination9':Destination9, 
     # 'Destination10':Destination10, 'result':result, 'distance1':sourcedistance[1], 'distance2':sourcedistance[2],
      #'distance3':sourcedistance[3], 'distance4':sourcedistance[4], 'distance5':sourcedistance[5], 'distance6':sourcedistance[6],
     # 'distance7':sourcedistance[7], 'distance8':sourcedistance[8], 'distance9':sourcedistance[9], 'distance10':sourcedistance[10],"""
      
-    return render(request, 'Manager/fleet.html', context)
+    #return render(request, 'Manager/fleet.html', context)
 
  
