@@ -56,7 +56,7 @@ ROOT_URLCONF = 'TMoS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['Templates','Manager\Templates','login\Templates'],
+        'DIRS': ['Templates','Manager\Templates','login\Templates','static'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from . import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,4 +29,5 @@ urlpatterns = [
     url(r'^rtms/map$', views.map, name='map'),
     url(r'^rtms', include('Manager.urls')),
     url(r'^login', include('login.urls')),
+    url(r'^favicon\.ico$',RedirectView.as_view(url='/static/image/favicon.ico')),
 ]

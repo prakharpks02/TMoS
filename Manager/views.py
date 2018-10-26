@@ -45,8 +45,8 @@ def rtms(request):
             capacityOfTruck = Home.capacityOfTruck
             Home.save()
             Dist_BASE_URL = 'https://maps.googleapis.com/maps/api/distancematrix/json'
-            Elevation_BASE_URL = 'https://maps.googleapis.com/maps/api/elevation/json' ?locations=39.7391536,-104.9847034|36.455556,-116.866667&key=YOUR_API_KEY
-            Geo_Base_URL = 'https://maps.googleapis.com/maps/api/geocode/json' ?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
+            Elevation_BASE_URL = 'https://maps.googleapis.com/maps/api/elevation/json'
+            Geo_Base_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
             API_KEY = 'AIzaSyC7g11CKYY1xfnx-_Ofv59oSuDAIqH8e1A'
             time = 'now'
 
@@ -69,7 +69,9 @@ def rtms(request):
                 for j in range(numberOfSources):
                     url_ele = Elevation_BASE_URL + '?' + 'locations=' + destinationlat[i] +','+ destinationlng[i] + '|' + destinationlat[j] +','+ destinationlng[j] + '&key=' + API_KEY
                     result_ele = simplejson.load(urllib.request.urlopen(url_ele))
-                    thetadest[i][j] = 
+                    ele[i] = result_ele['results'][0]['elevation']
+                    ele[j] = result_ele['results'][1]['elevation']
+                    thetadest[i][j] = atan()
             
             for i in range(numberOfSources):
                 distancesToW[i] =result['rows'][0]['elements'][i]['distance']['value']
@@ -129,13 +131,13 @@ def rtms(request):
 
 
     
-    context={'form':form,} """'Load':LoadByTruck, 'Dist':DistByTruck, 'No_of_rounds':roundsByTruck}"""
-    """'Source':Source, 'Destination1':Destination1, 'Destination2':Destination2, 'Destination3':Destination3, 'Destination4':Destination4, 'Destination5':Destination5,
-     'Destination6':Destination6, 'Destination7':Destination7, 'Destination8':Destination8, 'Destination9':Destination9, 
-     'Destination10':Destination10, 'result':result, 'distance1':sourcedistance[1], 'distance2':sourcedistance[2],
-     'distance3':sourcedistance[3], 'distance4':sourcedistance[4], 'distance5':sourcedistance[5], 'distance6':sourcedistance[6],
-     'distance7':sourcedistance[7], 'distance8':sourcedistance[8], 'distance9':sourcedistance[9], 'distance10':sourcedistance[10],"""
+    context={'form':form,} #"""'Load':LoadByTruck, 'Dist':DistByTruck, 'No_of_rounds':roundsByTruck"""
+    #"""'Source':Source, 'Destination1':Destination1, 'Destination2':Destination2, 'Destination3':Destination3, 'Destination4':Destination4, 'Destination5':Destination5,
+     #'Destination6':Destination6, 'Destination7':Destination7, 'Destination8':Destination8, 'Destination9':Destination9, 
+    # 'Destination10':Destination10, 'result':result, 'distance1':sourcedistance[1], 'distance2':sourcedistance[2],
+     #'distance3':sourcedistance[3], 'distance4':sourcedistance[4], 'distance5':sourcedistance[5], 'distance6':sourcedistance[6],
+    # 'distance7':sourcedistance[7], 'distance8':sourcedistance[8], 'distance9':sourcedistance[9], 'distance10':sourcedistance[10],"""
      
     return render(request, 'Manager/fleet.html', context)
 
-def 
+ 
