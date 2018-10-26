@@ -25,7 +25,7 @@ SECRET_KEY = '0#^xjezt5@8@(^b5ku5bie@jxjjcp06q$&f#6bll=g-7(v-7n9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['prakharpks02.pythonanywhere.com', 'localhost']
+ALLOWED_HOSTS = ['prakharpks02.pythonanywhere.com', 'localhost', 'tmos-web.azurewebsites.net']
 
 
 # Application definition
